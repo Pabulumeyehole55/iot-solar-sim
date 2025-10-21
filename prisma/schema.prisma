@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Site {
+  id                    String   @id
+  name                  String
+  country               String
+  timezone              String
+  capacityDcKw          Float
+  capacityAcKw          Float
+  tiltDeg               Float
+  azimuthDeg            Float
+  modules               Int
+  inverterEff           Float
+  degradationPctPerYear Float    @default(0.5)
+  baselineKgPerKwh      Float
+  lat                   Float?
+  lon                   Float?
+  outageWindows         String?  // JSON string
+  curtailmentPct        Float    @default(0.0)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  // Relations
+  telemetry       Telemetry[]
+  hourlySummaries HourlySummary[]
+  dailyDigests    DailyDigest[]
+
+  @@map("site")
+}
+
+model Telemetry {
+  siteId       String
+  tsUtc        String
+  poaIrrWm2    Float
+  tempC        Float
+  windMps      Float
+  acPowerKw    Float
+  acEnergyKwh  Float
+  status       String
+  rowHash      String
+
+  // Relations
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  @@id([siteId, tsUtc])
+  @@map("telemetry")
+}
+
+model HourlySummary {
+  hourUtc    String @id
+  siteId     String
+  energyKwh  Float
+  maxPowerKw Float
+  avgTempC   Float
+  avgIrrWm2  Float
+
+  // Relations
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  @@map("hourly_summary")
+}
+
+model DailyDigest {
+  siteId              String
+  dayUtc              String
+  energyKwh           Float
+  avoidedTco2e        Float
+  rows                Int
+  merkleRoot          String
+  csvCid              String?
+  jsonCid             String?
+  anchorAdapterTxId   String?
+  anchorTxHash        String?
+  createdAt           DateTime @default(now())
+
+  // Relations
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  @@id([siteId, dayUtc])
+  @@map("daily_digest")
+}

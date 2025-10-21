@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  iot-solar-sim:
+    build: .
+    ports:
+      - "4200:4200"
+    environment:
+      - NODE_ENV=production
+      - PORT=4200
+      - DATABASE_URL=file:./data/sim.db
+      - SIM_SEED=42
+      - INTERVAL_SECONDS=60
+      - DEFAULT_INTERVAL_MINUTES=5
+      - ANCHOR_ENABLED=true
+      - ADAPTER_API_URL=http://registry-adapter-api:4100
+      - ADAPTER_API_KEY=${ADAPTER_API_KEY:-}
+      - SITE_IDS=PRJ001,PRJ002
+      - BASELINE_FACTOR_KG_PER_KWH_IN=0.708
+      - BASELINE_FACTOR_KG_PER_KWH_DEFAULT=0.82
+      - LOG_LEVEL=info
+      - LOG_PRETTY=false
+      - MQTT_ENABLED=false
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    depends_on:
+      - registry-adapter-api
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4200/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  registry-adapter-api:
+    image: registry-adapter-api:latest
+    ports:
+      - "4100:4100"
+    environment:
+      - PORT=4100
+      - NODE_ENV=production
+      - DATABASE_URL=file:./data/adapter.db
+      - BLOCKCHAIN_RPC_URL=${BLOCKCHAIN_RPC_URL:-http://localhost:8545}
+      - PRIVATE_KEY=${PRIVATE_KEY:-}
+      - CONTRACT_ADDRESS=${CONTRACT_ADDRESS:-}
+    volumes:
+      - ./adapter-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Optional: MQTT broker for live telemetry streaming
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    restart: unless-stopped
+    profiles:
+      - mqtt
+
+volumes:
+  data:
+  logs:
+  adapter-data:
+  mosquitto-data:
+  mosquitto-log:

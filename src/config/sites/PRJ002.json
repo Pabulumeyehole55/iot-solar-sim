@@ -1,0 +1,18 @@
+{
+  "siteId": "PRJ002",
+  "name": "Solar Farm D",
+  "country": "US",
+  "timezone": "America/Los_Angeles",
+  "lat": 34.05,
+  "lon": -118.24,
+  "capacityDcKW": 8000,
+  "capacityAcKW": 6500,
+  "tiltDeg": 30,
+  "azimuthDeg": 180,
+  "modules": 15000,
+  "inverterEff": 0.975,
+  "degradationPctPerYear": 0.4,
+  "baselineKgPerKwh": 0.386,
+  "outageWindows": [],
+  "curtailmentPct": 0.02
+}

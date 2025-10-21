@@ -1,0 +1,24 @@
+{
+  "siteId": "PRJ001",
+  "name": "Solar Farm C",
+  "country": "IN",
+  "timezone": "Asia/Kolkata",
+  "lat": 18.52,
+  "lon": 73.85,
+  "capacityDcKW": 12000,
+  "capacityAcKW": 10000,
+  "tiltDeg": 20,
+  "azimuthDeg": 180,
+  "modules": 22000,
+  "inverterEff": 0.972,
+  "degradationPctPerYear": 0.5,
+  "baselineKgPerKwh": 0.708,
+  "outageWindows": [
+    {
+      "start": "03:00",
+      "end": "03:30",
+      "days": "SUN"
+    }
+  ],
+  "curtailmentPct": 0.03
+}
